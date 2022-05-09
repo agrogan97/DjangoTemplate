@@ -1,0 +1,28 @@
+{% extends "main.html" %}
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+{% if user.is_authenticated %}
+    <h4>You are currently logged in as {{user.username}} ({{user.email}}).</h4>
+    <div class="container py-5">
+        <h1>Update Account Settings</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <hr>
+            <button class="btn btn-primary" type="submit">Update</button>
+        </form>
+        <br>
+        <p class="text-center">Return <a href="/account/">home</a></p>
+    </div>
+
+{% else %}
+
+    <h4>Not loggged in. Please <a href="/account/login/"> login</a></h4>
+
+{% endif %}
+
+
+
+{% endblock %}

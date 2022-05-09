@@ -1,0 +1,22 @@
+{% extends "main.html" %}
+
+{% block content %}      
+
+{% load crispy_forms_tags %}
+
+<!--Login--> 
+<div class="container py-5">
+  <h1>Login</h1>
+  {% if user.is_authenticated %}
+    <h4>You are currently logged in as {{user.username}} ({{user.email}}).</h4>
+  {% endif %}
+  <form method="POST">
+    {% csrf_token %}
+    {{ login_form|crispy }}
+    <hr>
+    <button class="btn btn-primary" type="submit">Login</button>
+  </form>
+  <p class="text-center">Don't have an account? <a href="/account/register/">Create an account</a>.</p>
+</div>
+
+{% endblock %}
